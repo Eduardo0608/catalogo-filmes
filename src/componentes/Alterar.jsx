@@ -7,12 +7,18 @@ function Alterar() {
   const [values, setValues] = useState({ nome: "", genero: "", ano: "" });
   const [encontrado, setEncontrado] = useState(false);
   const [naoAchou, setNaoAchou] = useState(false);
+  const [erro, setErro] = useState("");
   const navigate = useNavigate();
 
   const API = "https://690a1f4b1a446bb9cc216ff6.mockapi.io/filmes/";
 
   const handleBuscar = () => {
-    if (!id) return;
+    if (!id) {
+      setErro("Digite um ID válido antes de procurar.");
+      return;
+    }
+
+    setErro("");
     axios
       .get(API + id)
       .then((res) => {
@@ -28,16 +34,25 @@ function Alterar() {
 
   const handleUpdate = (e) => {
     e.preventDefault();
+
+    if (!values.nome || !values.genero || !values.ano) {
+      setErro("Preencha todos os campos antes de salvar!");
+      return;
+    }
+
+    setErro("");
     axios
       .put(API + id, values)
       .then(() => navigate("/"))
-      .catch(console.log);
+      .catch(() => setErro("Erro ao atualizar o filme. Tente novamente."));
   };
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
       <div className="border bg-white shadow p-5 rounded w-50">
         <h1>Alterar Filme</h1>
+
+        {erro && <div className="alert alert-danger">{erro}</div>}
 
         {!encontrado && (
           <>
@@ -50,6 +65,7 @@ function Alterar() {
                 onChange={(e) => setId(e.target.value)}
               />
             </div>
+
             <button onClick={handleBuscar} className="btn btn-success me-2">
               Procurar
             </button>
@@ -95,6 +111,7 @@ function Alterar() {
                 onChange={(e) => setValues({ ...values, ano: e.target.value })}
               />
             </div>
+
             <button className="btn btn-success me-2">Salvar Alterações</button>
             <Link to="/" className="btn btn-primary">
               Cancelar
