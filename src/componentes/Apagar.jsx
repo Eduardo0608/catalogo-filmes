@@ -56,6 +56,7 @@ function Apagar() {
             <Link to="/" className="btn btn-primary">
               Cancelar
             </Link>
+
             {naoAchou && (
               <p className="text-danger mt-3">
                 Filme não encontrado! Verifique o ID.
@@ -73,7 +74,7 @@ function Apagar() {
             <button onClick={handleDelete} className="btn btn-danger me-2">
               Apagar
             </button>
-            <Link to="/" className="btn btn-secondary">
+            <Link to="/" className="btn btn-primary">
               Cancelar
             </Link>
           </div>
