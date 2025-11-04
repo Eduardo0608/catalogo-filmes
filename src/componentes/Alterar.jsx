@@ -1,0 +1,109 @@
+import axios from "axios";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+function Alterar() {
+  const [id, setId] = useState("");
+  const [values, setValues] = useState({ nome: "", genero: "", ano: "" });
+  const [encontrado, setEncontrado] = useState(false);
+  const [naoAchou, setNaoAchou] = useState(false);
+  const navigate = useNavigate();
+
+  const API = "https://690a1f4b1a446bb9cc216ff6.mockapi.io/filmes/";
+
+  const handleBuscar = () => {
+    if (!id) return;
+    axios
+      .get(API + id)
+      .then((res) => {
+        setValues(res.data);
+        setEncontrado(true);
+        setNaoAchou(false);
+      })
+      .catch(() => {
+        setEncontrado(false);
+        setNaoAchou(true);
+      });
+  };
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    axios
+      .put(API + id, values)
+      .then(() => navigate("/"))
+      .catch(console.log);
+  };
+
+  return (
+    <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
+      <div className="border bg-white shadow p-5 rounded w-50">
+        <h1>Alterar Filme</h1>
+
+        {!encontrado && (
+          <>
+            <div className="mb-3">
+              <label>Digite o ID do filme:</label>
+              <input
+                className="form-control"
+                type="text"
+                value={id}
+                onChange={(e) => setId(e.target.value)}
+              />
+            </div>
+            <button onClick={handleBuscar} className="btn btn-success me-2">
+              Procurar
+            </button>
+            <Link to="/" className="btn btn-primary">
+              Cancelar
+            </Link>
+
+            {naoAchou && (
+              <p className="text-danger mt-3">
+                Filme não encontrado! Verifique o ID digitado.
+              </p>
+            )}
+          </>
+        )}
+
+        {encontrado && (
+          <form onSubmit={handleUpdate} className="mt-4">
+            <div className="mb-2">
+              <label>Nome:</label>
+              <input
+                className="form-control"
+                value={values.nome}
+                onChange={(e) =>
+                  setValues({ ...values, nome: e.target.value })
+                }
+              />
+            </div>
+            <div className="mb-2">
+              <label>Gênero:</label>
+              <input
+                className="form-control"
+                value={values.genero}
+                onChange={(e) =>
+                  setValues({ ...values, genero: e.target.value })
+                }
+              />
+            </div>
+            <div className="mb-3">
+              <label>Ano:</label>
+              <input
+                className="form-control"
+                value={values.ano}
+                onChange={(e) => setValues({ ...values, ano: e.target.value })}
+              />
+            </div>
+            <button className="btn btn-success me-2">Salvar Alterações</button>
+            <Link to="/" className="btn btn-primary">
+              Cancelar
+            </Link>
+          </form>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default Alterar;
