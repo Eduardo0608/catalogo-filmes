@@ -14,61 +14,39 @@ function Inicio() {
   }, []);
 
   return (
-    <div className="d-flex flex-column justify-content-center align-items-center bg-light vh-100">
-      <h1 className="mb-4 text-primary fw-bold">Catálogo de Filmes</h1>
+    <div className="pagina-inicio container-fluid py-4">
+      <div className="cabecalho mb-4">
+        <h1 className="titulo">CATÁLOGO DE FILMES</h1>
+        <nav className="menu d-flex justify-content-center">
+          <Link to="/" className="menu-item">INÍCIO</Link>
+          <Link to="/criar" className="menu-item">CRIAR</Link>
+          <Link to="/alterar" className="menu-item">ALTERAR</Link>
+          <Link to="/apagar" className="menu-item">APAGAR</Link>
+        </nav>
+      </div>
 
-      <div className="w-75 rounded bg-white border shadow p-4">
-        <div className="d-flex justify-content-end mb-3">
-          <Link to="/criar" className="btn btn-success">
-            Novo Filme
-          </Link>
-        </div>
-
-        <table className="table table-striped text-center">
-          <thead className="table-dark">
-            <tr>
-              <th>ID</th>
-              <th>Nome</th>
-              <th>Ação</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.length > 0 ? (
-              data.map((filme, i) => (
-                <tr key={i}>
-                  <td>{filme.id}</td>
-                  <td>{filme.nome}</td>
-                  <td>
-                    <Link
-                      to={`/ler/${filme.id}`}
-                      className="btn btn-sm btn-info me-2"
-                    >
-                      Ler
-                    </Link>
-                    <Link
-                      to="/alterar"
-                      className="btn btn-sm btn-warning me-2"
-                    >
-                      Alterar
-                    </Link>
-                    <Link
-                      to="/apagar"
-                      className="btn btn-sm btn-danger"
-                    >
-                      Apagar
-                    </Link>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="3" className="text-muted">
-                  Nenhum filme cadastrado ainda.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+      <div className="lista-filmes mx-auto" style={{ maxWidth: 900 }}>
+        {data && data.length > 0 ? (
+          data.map((filme) => (
+            <Link
+              to={`/ler/${filme.id}`}
+              key={filme.id}
+              className="filme-row text-decoration-none"
+            >
+              <div className="row align-items-center p-3 bg-white border rounded mb-3 filme-card">
+                <div className="col-auto">
+                  <div className="badge-id">Id: {filme.id}</div>
+                </div>
+                <div className="col">
+                  <strong>Nome: </strong>
+                  <span className="nome-filme">{filme.nome}</span>
+                </div>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <div className="alert alert-secondary text-center">Nenhum filme cadastrado ainda.</div>
+        )}
       </div>
     </div>
   );
