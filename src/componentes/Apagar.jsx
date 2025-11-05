@@ -35,11 +35,11 @@ function Apagar() {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
+    <div className="d-flex justify-content-center align-items-center vh-100 bg-light position-relative">
       <div className="border bg-white shadow p-5 rounded w-50">
         <h1>Apagar Filme</h1>
 
-        {!filme && (
+        {!filme && !naoAchou && (
           <>
             <div className="mb-3">
               <label>Digite o ID do filme:</label>
@@ -56,12 +56,6 @@ function Apagar() {
             <Link to="/" className="btn btn-primary">
               Cancelar
             </Link>
-
-            {naoAchou && (
-              <p className="text-danger mt-3">
-                Filme não encontrado! Verifique o ID.
-              </p>
-            )}
           </>
         )}
 
@@ -80,6 +74,21 @@ function Apagar() {
           </div>
         )}
       </div>
+
+      {naoAchou && (
+        <div
+          className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-dark bg-opacity-50"
+          style={{ zIndex: 10 }}
+        >
+          <div className="bg-white p-5 rounded shadow text-center">
+            <h4>Filme não encontrado</h4>
+            <p className="text-muted">Verifique o ID digitado.</p>
+            <Link to="/" className="btn btn-primary mt-3">
+              Início
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
