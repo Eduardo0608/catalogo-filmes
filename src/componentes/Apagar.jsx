@@ -51,7 +51,7 @@ function Apagar() {
               />
             </div>
 
-            <button onClick={handleBuscar} className="btn btn-danger me-2">
+            <button onClick={handleBuscar} className="btn btn-success me-2">
               Buscar
             </button>
             <Link to="/" className="btn btn-primary">
@@ -62,7 +62,7 @@ function Apagar() {
               <div
                 className="mt-4 p-4 rounded text-white text-center"
                 style={{
-                  backgroundColor: "#dc3545", // vermelho Bootstrap
+                  backgroundColor: "#dc3545",
                   boxShadow: "0 0 10px rgba(0,0,0,0.2)",
                 }}
               >

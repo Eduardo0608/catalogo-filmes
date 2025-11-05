@@ -67,7 +67,7 @@ function Alterar() {
             </div>
 
             <button onClick={handleBuscar} className="btn btn-success me-2">
-              Procurar
+              Buscar
             </button>
             <Link to="/" className="btn btn-primary">
               Cancelar
@@ -77,7 +77,7 @@ function Alterar() {
               <div
                 className="mt-4 p-4 rounded text-white text-center"
                 style={{
-                  backgroundColor: "#dc3545", // vermelho Bootstrap
+                  backgroundColor: "#dc3545",
                   boxShadow: "0 0 10px rgba(0,0,0,0.2)",
                 }}
               >
@@ -118,7 +118,9 @@ function Alterar() {
               <input
                 className="form-control"
                 value={values.ano}
-                onChange={(e) => setValues({ ...values, ano: e.target.value })}
+                onChange={(e) =>
+                  setValues({ ...values, ano: e.target.value })
+                }
               />
             </div>
 
