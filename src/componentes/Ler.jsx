@@ -17,7 +17,7 @@ function Ler() {
         <h2>{data.nome}</h2>
         <p><b>Gênero:</b> {data.genero}</p>
         <p><b>Ano:</b> {data.ano}</p>
-        <Link to="/" className="btn btn-primary">Cancelar</Link>
+        <Link to="/" className="btn btn-primary">Voltar</Link>
       </div>
     </div>
   );

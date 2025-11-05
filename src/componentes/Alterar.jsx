@@ -48,90 +48,87 @@ function Alterar() {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 bg-light position-relative">
-      <div className="border bg-white shadow p-5 rounded w-50 position-relative">
+    <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
+      <div className="border bg-white shadow p-5 rounded w-50">
         <h1>Alterar Filme</h1>
 
         {erro && <div className="alert alert-danger">{erro}</div>}
 
-        <div>
-          {!encontrado && (
-            <>
-              <div className="mb-3">
-                <label>Digite o ID do filme:</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  value={id}
-                  onChange={(e) => setId(e.target.value)}
-                />
-              </div>
+        {!encontrado && (
+          <>
+            <div className="mb-3">
+              <label>Digite o ID do filme:</label>
+              <input
+                className="form-control"
+                type="text"
+                value={id}
+                onChange={(e) => setId(e.target.value)}
+              />
+            </div>
 
-              <button onClick={handleBuscar} className="btn btn-success me-2">
-                Procurar
-              </button>
-              <Link to="/" className="btn btn-primary">
-                Cancelar
-              </Link>
-            </>
-          )}
-
-          {encontrado && (
-            <form onSubmit={handleUpdate} className="mt-4">
-              <div className="mb-2">
-                <label>Nome:</label>
-                <input
-                  className="form-control"
-                  value={values.nome}
-                  onChange={(e) =>
-                    setValues({ ...values, nome: e.target.value })
-                  }
-                />
-              </div>
-              <div className="mb-2">
-                <label>Gênero:</label>
-                <input
-                  className="form-control"
-                  value={values.genero}
-                  onChange={(e) =>
-                    setValues({ ...values, genero: e.target.value })
-                  }
-                />
-              </div>
-              <div className="mb-3">
-                <label>Ano:</label>
-                <input
-                  className="form-control"
-                  value={values.ano}
-                  onChange={(e) =>
-                    setValues({ ...values, ano: e.target.value })
-                  }
-                />
-              </div>
-
-              <button className="btn btn-success me-2">Salvar Alterações</button>
-              <Link to="/" className="btn btn-primary">
-                Cancelar
-              </Link>
-            </form>
-          )}
-        </div>
-      </div>
-
-      {naoAchou && (
-        <div
-          className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-dark bg-opacity-50"
-          style={{ zIndex: 10 }}
-        >
-          <div className="bg-white p-5 rounded shadow text-center">
-            <h4>Filme não encontrado</h4>
-            <p className="text-muted">Verifique o ID digitado.</p>
-            <Link to="/" className="btn btn-primary mt-3">
-              Início
+            <button onClick={handleBuscar} className="btn btn-success me-2">
+              Procurar
+            </button>
+            <Link to="/" className="btn btn-primary">
+              Cancelar
             </Link>
-          </div>
-        </div>
-      )}
+
+            {naoAchou && (
+              <div
+                className="mt-4 p-4 rounded text-white text-center"
+                style={{
+                  backgroundColor: "#dc3545", // vermelho Bootstrap
+                  boxShadow: "0 0 10px rgba(0,0,0,0.2)",
+                }}
+              >
+                <h5>Filme não encontrado!</h5>
+                <p>Verifique o ID digitado ou volte para o início.</p>
+                <Link to="/" className="btn btn-light mt-2 fw-bold">
+                  Início
+                </Link>
+              </div>
+            )}
+          </>
+        )}
+
+        {encontrado && (
+          <form onSubmit={handleUpdate} className="mt-4">
+            <div className="mb-2">
+              <label>Nome:</label>
+              <input
+                className="form-control"
+                value={values.nome}
+                onChange={(e) =>
+                  setValues({ ...values, nome: e.target.value })
+                }
+              />
+            </div>
+            <div className="mb-2">
+              <label>Gênero:</label>
+              <input
+                className="form-control"
+                value={values.genero}
+                onChange={(e) =>
+                  setValues({ ...values, genero: e.target.value })
+                }
+              />
+            </div>
+            <div className="mb-3">
+              <label>Ano:</label>
+              <input
+                className="form-control"
+                value={values.ano}
+                onChange={(e) => setValues({ ...values, ano: e.target.value })}
+              />
+            </div>
+
+            <button className="btn btn-success me-2">Salvar Alterações</button>
+            <Link to="/" className="btn btn-primary">
+              Cancelar
+            </Link>
+          </form>
+        )}
+      </div>
     </div>
   );
 }
