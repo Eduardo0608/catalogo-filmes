@@ -36,43 +36,45 @@ function Apagar() {
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light position-relative">
-      <div className="border bg-white shadow p-5 rounded w-50">
+      <div className="border bg-white shadow p-5 rounded w-50 position-relative">
         <h1>Apagar Filme</h1>
 
-        {!filme && !naoAchou && (
-          <>
-            <div className="mb-3">
-              <label>Digite o ID do filme:</label>
-              <input
-                className="form-control"
-                type="text"
-                value={id}
-                onChange={(e) => setId(e.target.value)}
-              />
-            </div>
-            <button onClick={handleBuscar} className="btn btn-danger me-2">
-              Buscar
-            </button>
-            <Link to="/" className="btn btn-primary">
-              Cancelar
-            </Link>
-          </>
-        )}
+        <div>
+          {!filme && (
+            <>
+              <div className="mb-3">
+                <label>Digite o ID do filme:</label>
+                <input
+                  className="form-control"
+                  type="text"
+                  value={id}
+                  onChange={(e) => setId(e.target.value)}
+                />
+              </div>
+              <button onClick={handleBuscar} className="btn btn-danger me-2">
+                Buscar
+              </button>
+              <Link to="/" className="btn btn-primary">
+                Cancelar
+              </Link>
+            </>
+          )}
 
-        {filme && (
-          <div className="mt-4">
-            <h4>Confirmar exclusão:</h4>
-            <p><b>Nome:</b> {filme.nome}</p>
-            <p><b>Gênero:</b> {filme.genero}</p>
-            <p><b>Ano:</b> {filme.ano}</p>
-            <button onClick={handleDelete} className="btn btn-danger me-2">
-              Apagar
-            </button>
-            <Link to="/" className="btn btn-primary">
-              Cancelar
-            </Link>
-          </div>
-        )}
+          {filme && (
+            <div className="mt-4">
+              <h4>Confirmar exclusão:</h4>
+              <p><b>Nome:</b> {filme.nome}</p>
+              <p><b>Gênero:</b> {filme.genero}</p>
+              <p><b>Ano:</b> {filme.ano}</p>
+              <button onClick={handleDelete} className="btn btn-danger me-2">
+                Apagar
+              </button>
+              <Link to="/" className="btn btn-primary">
+                Cancelar
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
 
       {naoAchou && (

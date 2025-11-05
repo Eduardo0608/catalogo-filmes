@@ -49,69 +49,73 @@ function Alterar() {
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light position-relative">
-      <div className="border bg-white shadow p-5 rounded w-50">
+      <div className="border bg-white shadow p-5 rounded w-50 position-relative">
         <h1>Alterar Filme</h1>
 
         {erro && <div className="alert alert-danger">{erro}</div>}
 
-        {!encontrado && !naoAchou && (
-          <>
-            <div className="mb-3">
-              <label>Digite o ID do filme:</label>
-              <input
-                className="form-control"
-                type="text"
-                value={id}
-                onChange={(e) => setId(e.target.value)}
-              />
-            </div>
+        <div>
+          {!encontrado && (
+            <>
+              <div className="mb-3">
+                <label>Digite o ID do filme:</label>
+                <input
+                  className="form-control"
+                  type="text"
+                  value={id}
+                  onChange={(e) => setId(e.target.value)}
+                />
+              </div>
 
-            <button onClick={handleBuscar} className="btn btn-success me-2">
-              Procurar
-            </button>
-            <Link to="/" className="btn btn-primary">
-              Cancelar
-            </Link>
-          </>
-        )}
+              <button onClick={handleBuscar} className="btn btn-success me-2">
+                Procurar
+              </button>
+              <Link to="/" className="btn btn-primary">
+                Cancelar
+              </Link>
+            </>
+          )}
 
-        {encontrado && (
-          <form onSubmit={handleUpdate} className="mt-4">
-            <div className="mb-2">
-              <label>Nome:</label>
-              <input
-                className="form-control"
-                value={values.nome}
-                onChange={(e) =>
-                  setValues({ ...values, nome: e.target.value })
-                }
-              />
-            </div>
-            <div className="mb-2">
-              <label>Gênero:</label>
-              <input
-                className="form-control"
-                value={values.genero}
-                onChange={(e) =>
-                  setValues({ ...values, genero: e.target.value })
-                }
-              />
-            </div>
-            <div className="mb-3">
-              <label>Ano:</label>
-              <input
-                className="form-control"
-                value={values.ano}
-                onChange={(e) => setValues({ ...values, ano: e.target.value })}
-              />
-            </div>
+          {encontrado && (
+            <form onSubmit={handleUpdate} className="mt-4">
+              <div className="mb-2">
+                <label>Nome:</label>
+                <input
+                  className="form-control"
+                  value={values.nome}
+                  onChange={(e) =>
+                    setValues({ ...values, nome: e.target.value })
+                  }
+                />
+              </div>
+              <div className="mb-2">
+                <label>Gênero:</label>
+                <input
+                  className="form-control"
+                  value={values.genero}
+                  onChange={(e) =>
+                    setValues({ ...values, genero: e.target.value })
+                  }
+                />
+              </div>
+              <div className="mb-3">
+                <label>Ano:</label>
+                <input
+                  className="form-control"
+                  value={values.ano}
+                  onChange={(e) =>
+                    setValues({ ...values, ano: e.target.value })
+                  }
+                />
+              </div>
 
-            <button className="btn btn-success me-2">Salvar Alterações</button>
-            <Link to="/" className="btn btn-primary">
-              Cancelar
-            </Link>
-          </form>
-        )}
+              <button className="btn btn-success me-2">Salvar Alterações</button>
+              <Link to="/" className="btn btn-primary">
+                Cancelar
+              </Link>
+            </form>
+          )}
+        </div>
       </div>
 
       {naoAchou && (
